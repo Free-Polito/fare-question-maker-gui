@@ -1,16 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""
-ZetCode Tkinter tutorial
-
-In this script, we use the pack manager
-to create a more complex layout.
-
-Author: Jan Bodnar
-Last modified: December 2015
-Website: www.zetcode.com
-"""
 
 from Tkinter import Tk, Text, TOP, BOTH, X, N, LEFT, RAISED, RIGHT
 from ttk import Frame, Label, Entry, Button
