@@ -14,7 +14,6 @@ class Example(Frame):
         self.parent = parent
         self.initUI()
 
-        
     def initUI(self):
       
         self.parent.title("Review")
@@ -40,31 +39,29 @@ class Example(Frame):
         entry2 = Entry(frame2)
         entry2.pack(fill=X, padx=5, expand=True)
         
-        ### Frame 3
-        frame3 = Frame(self)
-        frame3.pack(fill=BOTH, expand=True)
-        
-        lbl3 = Label(frame3, text="Review", width=6)
-        lbl3.pack(side=LEFT, anchor=N, padx=5, pady=5)        
-
-        txt = Text(frame3)
-        txt.pack(fill=BOTH, pady=5, padx=5, expand=True)           
-        
         ### Frame 4
-
         frame4 = Frame(self)
         frame4.pack(fill=BOTH, expand=True)
         
-        closeButton = Button(self, text="Close")
+        # Close button -> close on click
+        closeButton = Button(self, text="Close", command=self.master.quit)
         closeButton.pack(side=RIGHT, padx=5, pady=5)
-        okButton = Button(self, text="OK")
+
+        # Save button -> save a new line in the file and continues the exec
+        okButton = Button(self, text="Salva", command=lambda: valueGET(entry1.get(), entry2.get()))
         okButton.pack(side=RIGHT)
 
+    # Function for the ok button
+    def salva(self):
+        print("Sto salvando...")
+
+def valueGET(val1, val2):
+    print val1 + "  " + val2
 
 def main():
   
     root = Tk()
-    root.geometry("300x300+300+300")
+    root.geometry("800x600+300+300")
     app = Example(root)
     root.mainloop()  
 
