@@ -106,10 +106,11 @@ class Example(Frame):
           return
         
         da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
-        da_appendere_completo = da_appendere + "2;1;0\n"
-        with open("data.jj", "a") as myfile:
-          myfile.write(da_appendere)
-        tkMessageBox.showinfo("Stampato", da_appendere_completo)
+        da_appendere_completo = da_appendere + ";2;1;0\n"
+        filename = "data.jj"
+        with open(filename, "a") as myfile:
+          myfile.write(da_appendere_completo)
+        tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
 
 
 def main():
