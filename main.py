@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-from Tkinter import Tk, Text, TOP, BOTH, X, N, LEFT, RAISED, RIGHT
+from Tkinter import *
 from ttk import Frame, Label, Entry, Button
+import tkMessageBox
 
 
 class Example(Frame):
@@ -86,12 +87,21 @@ class Example(Frame):
         print("Sto salvando...")
 
     def valueGET(self, domanda, r1, r2, r3, rcorrect):
-        print domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
+        # check
+        if not domanda:
+          # non definita
+          return
+        da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect + "\n"
+        with open("test.txt", "a") as myfile:
+          myfile.write(da_appendere)
+        tkMessageBox.showinfo("Stampato", da_appendere)
+
+
 
 def main():
   
     root = Tk()
-    root.geometry("800x600+300+300")
+    root.geometry("600x300+300+300")
     app = Example(root)
     root.mainloop()  
 
