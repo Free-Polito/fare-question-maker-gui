@@ -82,20 +82,34 @@ class Example(Frame):
         okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get(), entry3.get(), entry4.get(), entry5.get()))
         okButton.pack(side=RIGHT)
 
-    # Function for the ok button
-    def salva(self):
-        print("Sto salvando...")
-
     def valueGET(self, domanda, r1, r2, r3, rcorrect):
         # check
         if not domanda:
           # non definita
+          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della domanda! Reinserire grazie")
           return
-        da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect + "\n"
-        with open("test.txt", "a") as myfile:
+        if not r1:
+          # non definita
+          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 1! Reinserire grazie")
+          return
+        if not r2:
+          # non definita
+          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 2! Reinserire grazie")
+          return
+        if not r3:
+          # non definita
+          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 3! Reinserire grazie")
+          return
+        if not rcorrect:
+          # non definita
+          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta corretta! Reinserire grazie")
+          return
+        
+        da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
+        da_appendere_completo = da_appendere + "2;1;0\n"
+        with open("data.jj", "a") as myfile:
           myfile.write(da_appendere)
-        tkMessageBox.showinfo("Stampato", da_appendere)
-
+        tkMessageBox.showinfo("Stampato", da_appendere_completo)
 
 
 def main():
