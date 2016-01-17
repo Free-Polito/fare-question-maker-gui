@@ -78,15 +78,15 @@ class Example(Frame):
         closeButton.pack(side=RIGHT, padx=5, pady=5)
 
         # Save button -> save a new line in the file and continues the exec
-        okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get()))
+        okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get(), entry3.get(), entry4.get(), entry5.get()))
         okButton.pack(side=RIGHT)
 
     # Function for the ok button
     def salva(self):
         print("Sto salvando...")
 
-    def valueGET(self, val1, val2):
-        print val1 + "  " + val2
+    def valueGET(self, domanda, r1, r2, r3, rcorrect):
+        print domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
 
 def main():
   
