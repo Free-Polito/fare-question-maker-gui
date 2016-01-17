@@ -115,9 +115,18 @@ class Example(Frame):
         da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
         da_appendere_completo = da_appendere + ";2;1;0\n"
         filename = "data.jj"
+        
+        # Prova ad aprire file -> TRY / CATCH
+        #   Se sono dentro allora check che non ci sia stessa stringa
+        # with open(filename, "r") as myfile:
+        #   readString = myfile.read
+        #   if(readString == da_appendere_completo):
+        #     tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
+        #     return
+
         with open(filename, "a") as myfile:
           myfile.write(da_appendere_completo)
-        tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
+          tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
 
 
 def main():
