@@ -19,7 +19,14 @@ class Example(Frame):
       
         self.parent.title("Review")
         self.pack(fill=BOTH, expand=True)
+       
+        ## Frame 0 - Solo descrizione
+        frame0 = Frame(self)
+        frame0.pack(fill=X)
         
+        descrizione = Label(frame0, text="Compilare tutti i campi e poi salvare per inserire una nuova riga nel file delle domande", width=100)
+        descrizione.pack(side=LEFT, padx=5, pady=5)
+
         ### Frame 1
         frame1 = Frame(self)
         frame1.pack(fill=X)
