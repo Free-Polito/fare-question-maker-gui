@@ -118,11 +118,14 @@ class Example(Frame):
         
         # Prova ad aprire file -> TRY / CATCH
         #   Se sono dentro allora check che non ci sia stessa stringa
-        # with open(filename, "r") as myfile:
-        #   readString = myfile.read
-        #   if(readString == da_appendere_completo):
-        #     tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
-        #     return
+        try:
+          myfile = open(filename, "r")
+          readString = myfile.read()
+          if(readString == da_appendere_completo):
+            tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
+            return
+        except IOError as e:
+          print "Il file non esiste!"
 
         with open(filename, "a") as myfile:
           myfile.write(da_appendere_completo)
