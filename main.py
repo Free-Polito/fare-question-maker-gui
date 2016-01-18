@@ -120,10 +120,11 @@ class Example(Frame):
         #   Se sono dentro allora check che non ci sia stessa stringa
         try:
           myfile = open(filename, "r")
-          readString = myfile.read()
-          if(readString == da_appendere_completo):
-            tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
-            return
+          
+          for line in myfile:
+            if(line == da_appendere_completo):
+              tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
+              return
         except IOError as e:
           print "Il file non esiste!"
 
