@@ -4,6 +4,7 @@
 
 from Tkinter import *
 from ttk import Frame, Label, Entry, Button
+from random import randint
 import tkMessageBox
 
 
@@ -61,21 +62,11 @@ class Example(Frame):
         frame4 = Frame(self)
         frame4.pack(fill=X)
         
-        risposta3 = Label(frame4, text="Risposta 3 - ERRATA", width=20)
-        risposta3.pack(side=LEFT, padx=5, pady=5)        
+        risposta_giusta = Label(frame4, text="Risposta CORRETTA", width=20)
+        risposta_giusta.pack(side=LEFT, padx=5, pady=5)        
 
         entry4 = Entry(frame4)
         entry4.pack(fill=X, padx=5, expand=True)
-
-        ### Frame 5
-        frame5 = Frame(self)
-        frame5.pack(fill=X)
-        
-        risposta_giusta = Label(frame5, text="Risposta CORRETTA", width=20)
-        risposta_giusta.pack(side=LEFT, padx=5, pady=5)        
-
-        entry5 = Entry(frame5)
-        entry5.pack(fill=X, padx=5, expand=True)
 
         ### Frame 6
         frame6 = Frame(self)
@@ -86,10 +77,10 @@ class Example(Frame):
         closeButton.pack(side=RIGHT, padx=5, pady=5)
 
         # Save button -> save a new line in the file and continues the exec
-        okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get(), entry3.get(), entry4.get(), entry5.get()))
+        okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get(), entry3.get(), entry4.get()))
         okButton.pack(side=RIGHT)
 
-    def valueGET(self, domanda, r1, r2, r3, rcorrect):
+    def valueGET(self, domanda, r1, r2, rcorrect):
         # check
         if not domanda:
           # non definita
@@ -103,33 +94,39 @@ class Example(Frame):
           # non definita
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 2! Reinserire grazie")
           return
-        if not r3:
-          # non definita
-          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 3! Reinserire grazie")
-          return
         if not rcorrect:
           # non definita
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta corretta! Reinserire grazie")
           return
         
-        da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + r3 + ";" + rcorrect
-        da_appendere_completo = da_appendere + ";2;1;0\n"
+        # da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + rcorrect
+
+        # mescolo le risposte
+        # estraggo un numero casuale tra 0 e 2
+        casual = randint(0,2)
+        # costruisco la stringa finale da stampare
+        if(casual == 0):
+          da_appendere = domanda + ";" + rcorrect + ";" + r1 + ";" + r2 + ";0;1;0\n"
+        elif(casual == 1):
+          da_appendere = domanda + ";" + r1 + ";" + rcorrect + ";" + r2 + ";1;1;0\n"
+        else:
+          da_appendere = domanda + ";" + r2 + ";" + r1 + ";" + rcorrect + ";2;1;0\n"
+
         filename = "data.jj"
         
         # Prova ad aprire file -> TRY / CATCH
         #   Se sono dentro allora check che non ci sia stessa stringa
         try:
           myfile = open(filename, "r")
-          
           for line in myfile:
-            if(line == da_appendere_completo):
+            if( (r1 in line) and (r2 in line) and (rcorrect in line)):
               tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
               return
         except IOError as e:
           print "Il file non esiste!"
 
         with open(filename, "a") as myfile:
-          myfile.write(da_appendere_completo)
+          myfile.write(da_appendere)
           tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
 
 
