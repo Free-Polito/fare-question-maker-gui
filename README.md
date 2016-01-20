@@ -6,6 +6,7 @@ HOW TO
 
 TODO
 ====
+* Add first line in in file
 * ~~Add executable~~
 * ~~Check docs to react to events~~
 * ~~Insert try/catch for opening files~~
