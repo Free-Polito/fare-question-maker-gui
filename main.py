@@ -73,7 +73,7 @@ class Example(Frame):
         frame6.pack(fill=BOTH, expand=True)
         
         # Close button -> close on click
-        closeButton = Button(self, text="Close", command=self.master.quit)
+        closeButton = Button(self, text="Chiudi", command=self.master.quit)
         closeButton.pack(side=RIGHT, padx=5, pady=5)
 
         # Save button -> save a new line in the file and continues the exec
@@ -133,6 +133,7 @@ class Example(Frame):
             print "Scritta riga iniziale"
           except IOError:
             print "Errore in scrittura"
+            return
 
         with open(filename, "a") as myfile:
           myfile.write(da_appendere)
