@@ -103,14 +103,14 @@ class Example(Frame):
 
         # mescolo le risposte
         # estraggo un numero casuale tra 0 e 2
-        casual = randint(0,2)
+        casual = randint(1,3)
         # costruisco la stringa finale da stampare
-        if(casual == 0):
-          da_appendere = domanda + ";" + rcorrect + ";" + r1 + ";" + r2 + ";0;1;0\n"
-        elif(casual == 1):
-          da_appendere = domanda + ";" + r1 + ";" + rcorrect + ";" + r2 + ";1;1;0\n"
+        if(casual == 1):
+          da_appendere = domanda + ";" + rcorrect + ";" + r1 + ";" + r2 + ";1;1;0\n"
+        elif(casual == 2):
+          da_appendere = domanda + ";" + r1 + ";" + rcorrect + ";" + r2 + ";2;1;0\n"
         else:
-          da_appendere = domanda + ";" + r2 + ";" + r1 + ";" + rcorrect + ";2;1;0\n"
+          da_appendere = domanda + ";" + r2 + ";" + r1 + ";" + rcorrect + ";3;1;0\n"
 
         filename = "data.jj"
         
@@ -123,7 +123,16 @@ class Example(Frame):
               tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
               return
         except IOError as e:
-          print "Il file non esiste!"
+          print "Il file " + filename + " non esiste!"
+          # Allora creo la stringa di prova
+          try:
+            myfile = open(filename, "w")
+            riga_iniziale = "Domanda;risposta 1;risposta 2;risposta 3;risposta esatta;punti risposta esatta;punti riposta sbagliata\n"
+            myfile.write(riga_iniziale)
+            print "Creato file: " + filename
+            print "Scritta riga iniziale"
+          except IOError:
+            print "Errore in scrittura"
 
         with open(filename, "a") as myfile:
           myfile.write(da_appendere)
