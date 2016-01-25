@@ -118,19 +118,25 @@ class Example(Frame):
         #   Se sono dentro allora check che non ci sia stessa stringa
         try:
           myfile = open(filename, "r")
-          for line in myfile:
-            if( (r1 in line) and (r2 in line) and (rcorrect in line)):
-              tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
-              return
+          try:
+            for line in myfile:
+              if( (r1 in line) and (r2 in line) and (rcorrect in line)):
+                tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
+                return
+          finally:
+            myfile.close()
         except IOError as e:
           print "Il file " + filename + " non esiste!"
           # Allora creo la stringa di prova
           try:
             myfile = open(filename, "w")
-            riga_iniziale = "Domanda;risposta 1;risposta 2;risposta 3;risposta esatta;punti risposta esatta;punti riposta sbagliata\n"
-            myfile.write(riga_iniziale)
-            print "Creato file: " + filename
-            print "Scritta riga iniziale"
+            try:
+              riga_iniziale = "Domanda;risposta 1;risposta 2;risposta 3;risposta esatta;punti risposta esatta;punti riposta sbagliata\n"
+              myfile.write(riga_iniziale)
+              print "Creato file: " + filename
+              print "Scritta riga iniziale"
+            finally:
+              myfile.close()
           except IOError:
             print "Errore in scrittura"
             return
