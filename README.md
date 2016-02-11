@@ -5,7 +5,7 @@ HOW TO
 * ~~Avviare con ```python main.py``` in una cartella con permessi di scrittura~~
 * ~~Una volta finito e salvato, il file da usare è ```data.jj```~~
 
-EXECUTABLE
+CREATE EXECUTABLE
 ==========
 * pyinstaller -D -F -n questionmaker -c "main.py"
 
