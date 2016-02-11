@@ -8,7 +8,7 @@ from random import randint
 import tkMessageBox
 
 
-class Example(Frame):
+class QuestionMaker(Frame):
   
     def __init__(self, parent):
         Frame.__init__(self, parent)   
@@ -150,7 +150,7 @@ def main():
   
     root = Tk()
     root.geometry("600x300+300+300")
-    app = Example(root)
+    app = QuestionMaker(root)
     root.mainloop()  
 
 
