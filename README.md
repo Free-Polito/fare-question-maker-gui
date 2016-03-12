@@ -12,6 +12,7 @@ CREATE EXECUTABLE
 
 TODO
 ====
+* Use template for new python game
 * ~~FIX bug #1~~
 * ~~Add first line in in file~~
 * ~~Add executable~~
