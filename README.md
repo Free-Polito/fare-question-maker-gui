@@ -8,7 +8,7 @@ HOW TO
 CREATE EXECUTABLE
 ==========
 * pyinstaller -D -F -n questionmaker -c "main.py"
-
+-> Tried only on linux
 
 TODO
 ====
