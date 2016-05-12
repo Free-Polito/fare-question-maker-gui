@@ -20,6 +20,11 @@ TODO
 * ~~Insert try/catch for opening files~~
 * ~~Release 0.1~~
 
-KNOWN BUGS
+FIXED BUGS
 ==========
 * [1] FIXED ~~Does not work with this numbering, change to 1 to 3 (instead of 0 to 2)~~ 
+
+
+KNOWN BUGS
+==========
+None
