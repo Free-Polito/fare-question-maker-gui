@@ -1,18 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# questionmakergui main py file
+# Author: libremente <surf [AT] libremnte [DOT] eu>
 
-
+# Imports
 from Tkinter import *
 from ttk import Frame, Label, Entry, Button
 from random import randint
 import tkMessageBox
 
-
+# QuestionMaker main class
 class QuestionMaker(Frame):
   
     def __init__(self, parent):
         Frame.__init__(self, parent)   
-         
         self.parent = parent
         self.initUI()
 
@@ -21,7 +22,7 @@ class QuestionMaker(Frame):
         self.parent.title("Review")
         self.pack(fill=BOTH, expand=True)
        
-        ## Frame 0 - Solo descrizione
+        ## Frame 0 - Description Only 
         frame0 = Frame(self)
         frame0.pack(fill=X)
         
@@ -83,28 +84,28 @@ class QuestionMaker(Frame):
     def valueGET(self, domanda, r1, r2, rcorrect):
         # check
         if not domanda:
-          # non definita
+          # not defined 
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della domanda! Reinserire grazie")
           return
         if not r1:
-          # non definita
+          # not defined 
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 1! Reinserire grazie")
           return
         if not r2:
-          # non definita
+          # not defined 
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 2! Reinserire grazie")
           return
         if not rcorrect:
-          # non definita
+          # not defined 
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta corretta! Reinserire grazie")
           return
         
         # da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + rcorrect
 
-        # mescolo le risposte
-        # estraggo un numero casuale tra 0 e 2
+        # Mixing answers 
+        # Extracting casual number between 1 and 3 
         casual = randint(1,3)
-        # costruisco la stringa finale da stampare
+        # Building the final string to be printed 
         if(casual == 1):
           da_appendere = domanda + ";" + rcorrect + ";" + r1 + ";" + r2 + ";1;1;0\n"
         elif(casual == 2):
@@ -114,8 +115,8 @@ class QuestionMaker(Frame):
 
         filename = "data.jj"
         
-        # Prova ad aprire file -> TRY / CATCH
-        #   Se sono dentro allora check che non ci sia stessa stringa
+        # Try to open file 
+        # - check if line already exists 
         try:
           myfile = open(filename, "r")
           try:
@@ -127,7 +128,7 @@ class QuestionMaker(Frame):
             myfile.close()
         except IOError as e:
           print "Il file " + filename + " non esiste!"
-          # Allora creo la stringa di prova
+          # Create line 
           try:
             myfile = open(filename, "w")
             try:
@@ -146,13 +147,13 @@ class QuestionMaker(Frame):
           tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
 
 
+# main function with main loop
 def main():
   
     root = Tk()
     root.geometry("600x300+300+300")
     app = QuestionMaker(root)
     root.mainloop()  
-
 
 if __name__ == '__main__':
     main()  
