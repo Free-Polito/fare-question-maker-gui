@@ -8,7 +8,7 @@ folder where the game executable is launched.
 HOW TO
 ======
 * Download latest release from
-  [here](https://github.com/libremente/questionmakergui/releases) 
+  [here](https://github.com/Free-Polito/question-maker-gui/releases)
 * Double click on ``questionmakergui`` file inside a folder with write
   permissions enabled.  
 
