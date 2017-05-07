@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # questionmakergui main py file
-# Author: libremente <surf [AT] libremnte [DOT] eu>
+# Author: libremente <surf [AT] libremente [DOT] eu>
 
 # Imports
 from Tkinter import *
