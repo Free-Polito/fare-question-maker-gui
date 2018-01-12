@@ -16,8 +16,8 @@ HOW TO
 CREATE EXECUTABLE
 ==========
 For developing purposes only:
-* pyinstaller -D -F -n questionmaker -c "main.py"
--> Tried only on Debian 8 
+* `pyinstaller -D -F -n questionmaker -c "main.py"`  
+Tried only on Debian 8 
 
 TODO
 ====
