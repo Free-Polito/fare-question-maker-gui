@@ -1,9 +1,10 @@
 Question Maker GUI
 ==================
-This package is meant for creating a proper database of questions for the
-[game](http://fare.polito.it/gioco). It has a GUI interface in order to easily
-create and save the database file. The file created has to be moved to the
-folder where the game executable is launched. 
+Thanks to this GUI application it is possible to create a proper database of
+questions for the last game in [this](http://fare.polito.it/gioco/#section-3)
+page.  It makes it easy to create and save the database file. The file
+created, named `data.jj`, has to be moved to the folder where the game
+executable is launched in order to be correctly read. 
 
 HOW TO
 ======
@@ -20,20 +21,15 @@ For developing purposes only:
 
 TODO
 ====
+**v0.1-1**
+* Check pylint and refactor code
 * Use template for new python game
 * Translate texts in English
 
-FIXED BUGS
-==========
-* [1] FIXED ~~Does not work with this numbering, change to 1 to 3 (instead of 0 to 2)~~ 
-
-KNOWN BUGS
-==========
-None
-
 AUTHOR
 ======
-libremente <surf [AT] libremente [DOT] eu>
+libremente 
+<surf [AT] libremente [DOT] eu>
 
 LICENSE
 =======

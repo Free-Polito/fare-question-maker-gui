@@ -4,7 +4,7 @@
 # Author: libremente <surf [AT] libremente [DOT] eu>
 
 # Imports
-from Tkinter import *
+from Tkinter import Tk, BOTH, X, LEFT, RIGHT
 from ttk import Frame, Label, Entry, Button
 from random import randint
 import tkMessageBox
@@ -74,19 +74,22 @@ class QuestionMaker(Frame):
         frame6.pack(fill=BOTH, expand=True)
         
         # Close button -> close on click
-        closeButton = Button(self, text="Chiudi", command=self.master.quit)
-        closeButton.pack(side=RIGHT, padx=5, pady=5)
+        close_button = Button(self, text="Chiudi", command=self.master.quit)
+        close_button.pack(side=RIGHT, padx=5, pady=5)
 
         # Save button -> save a new line in the file and continues the exec
-        okButton = Button(self, text="Salva", command=lambda: self.valueGET(entry1.get(), entry2.get(), entry3.get(), entry4.get()))
-        okButton.pack(side=RIGHT)
+        ok_button = Button(self, text="Salva", 
+                command=lambda: self.value_get(
+                    entry1.get(), entry2.get(), entry3.get(), entry4.get()
+                ))
+        ok_button.pack(side=RIGHT)
 
-    def valueGET(self, domanda, r1, r2, rcorrect):
+    def value_get(self, domanda, r1, r2, rcorrect):
         # check
         if not domanda:
-          # not defined 
-          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della domanda! Reinserire grazie")
-          return
+            # not defined 
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della domanda! Reinserire grazie")
+            return
         if not r1:
           # not defined 
           tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 1! Reinserire grazie")
@@ -113,13 +116,14 @@ class QuestionMaker(Frame):
         else:
           da_appendere = domanda + ";" + r2 + ";" + r1 + ";" + rcorrect + ";3;1;0\n"
 
+        # Name of output file
         filename = "data.jj"
         
         # Try to open file 
-        # - check if line already exists 
         try:
           myfile = open(filename, "r")
           try:
+            # Check if line exists
             for line in myfile:
               if( (r1 in line) and (r2 in line) and (rcorrect in line)):
                 tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
