@@ -25,7 +25,34 @@ import tkMessageBox
 
 class Question(object):
     """ Class for storing the question/answers """
-    def __init__(self, question, ans_1, ans_2, ans_correct):
+    def __init__(self, question, ans_1, ans_2, ans_correct):        
+        self.empty = False
+         # Check values
+        if not question:
+            # not defined 
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
+                    "correttamente il testo della domanda! Reinserire grazie")
+            self.empty = True 
+            return
+        if not ans_1:
+          # not defined 
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
+                    "correttamente la risposta 1! Reinserire grazie")
+            self.empty = True 
+            return
+        if not ans_2:
+          # not defined 
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
+                    "correttamente la risposta 2! Reinserire grazie")
+            self.empty = True 
+            return
+        if not ans_correct:
+          # not defined 
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
+                    "correttamente la risposta corretta! Reinserire grazie")
+            self.empty = True 
+            return
+
         self.question = question
         self.ans_1 = ans_1
         self.ans_2 = ans_2
@@ -114,28 +141,10 @@ class QuestionMaker(Frame):
     @classmethod
     def value_get(cls, self, question):
         """ Get the value from the frames """
-        # check
-        if not question.question:
-            # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
-                    "correttamente il testo della domanda! Reinserire grazie")
+
+        if(question.empty):
             return
-        if not question.ans_1:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
-                    "correttamente la risposta 1! Reinserire grazie")
-            return
-        if not question.ans_2:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
-                    "correttamente la risposta 2! Reinserire grazie")
-            return
-        if not question.ans_correct:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
-                    "correttamente la risposta corretta! Reinserire grazie")
-            return
-        
+       
         # Mixing answers 
         # Extracting casual number between 1 and 3 
         casual = randint(1, 3)
