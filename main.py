@@ -28,28 +28,10 @@ class Question(object):
     def __init__(self, question, ans_1, ans_2, ans_correct):        
         self.empty = False
          # Check values
-        if not question:
+        if not question or not ans_1 or not ans_2 or not ans_correct:
             # not defined 
             tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
-                    "correttamente il testo della domanda! Reinserire grazie")
-            self.empty = True 
-            return
-        if not ans_1:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
-                    "correttamente la risposta 1! Reinserire grazie")
-            self.empty = True 
-            return
-        if not ans_2:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
-                    "correttamente la risposta 2! Reinserire grazie")
-            self.empty = True 
-            return
-        if not ans_correct:
-          # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
-                    "correttamente la risposta corretta! Reinserire grazie")
+                    "correttamente un campo! Reinserire grazie")
             self.empty = True 
             return
 
