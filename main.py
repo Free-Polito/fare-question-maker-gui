@@ -135,7 +135,8 @@ class QuestionMaker(Frame):
         if(casual == 1):
             da_appendere = question.question + ";" \
                     + question.ans_correct + ";" \
-                    + question.ans_1 + ";" + question.ans_2 + ";1;1;0\n"
+                    + question.ans_1 + ";" \
+                    + question.ans_2 + ";1;1;0\n"
         elif(casual == 2):
             da_appendere = question.question + ";" \
                     + question.ans_1 + ";" \
@@ -144,7 +145,8 @@ class QuestionMaker(Frame):
         else:
             da_appendere = question.question + ";" \
                     + question.ans_2 + ";" \
-                    + question.ans_1 + ";" + question.ans_correct + ";3;1;0\n"
+                    + question.ans_1 + ";" \
+                    + question.ans_correct + ";3;1;0\n"
 
         # Name of output file
         filename = "data.jj"
@@ -164,8 +166,9 @@ class QuestionMaker(Frame):
                         and (question.ans_2 in line) 
                         and (question.ans_correct in line)):
                         tkMessageBox.showinfo("Attenzione!", 
-                        "La riga inserita esiste già nel database." \
-                                "Evita i duplicati!")
+                            "La riga inserita esiste già nel database." \
+                            "Evita i duplicati!"
+                        )
                         return
             finally:
                 myfile.close()
