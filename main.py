@@ -124,6 +124,7 @@ class QuestionMaker(Frame):
     def value_get(cls, self, question):
         """ Get the value from the frames """
 
+        # Check if object is empty, if yes return
         if(question.empty):
             return
        
