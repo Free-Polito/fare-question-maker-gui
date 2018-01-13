@@ -22,15 +22,28 @@ from ttk import Frame, Label, Entry, Button
 from random import randint
 import tkMessageBox
 
+
+class Question(object):
+    """ Class for storing the question/answers """
+    def __init__(self, question, ans_1, ans_2, ans_correct):
+        self.question = question
+        self.ans_1 = ans_1
+        self.ans_2 = ans_2
+        self.ans_correct = ans_correct
+
+
 # QuestionMaker main class
 class QuestionMaker(Frame):
+    """ Main class for the GUI creation """
   
     def __init__(self, parent):
         Frame.__init__(self, parent)   
         self.parent = parent
-        self.initUI()
+        self.init_ui(self)
 
-    def initUI(self):
+    @classmethod
+    def init_ui(cls, self):
+        """ Init the UI, creating all the frames """
       
         self.parent.title("Review")
         self.pack(fill=BOTH, expand=True)
@@ -39,7 +52,8 @@ class QuestionMaker(Frame):
         frame0 = Frame(self)
         frame0.pack(fill=X)
         
-        descrizione = Label(frame0, text="Compilare tutti i campi e poi salvare per inserire una nuova riga nel file delle domande", width=100)
+        descrizione = Label(frame0, text="Compilare tutti i campi e poi " \
+        "salvare per inserire una nuova riga nel file", width=100)
         descrizione.pack(side=LEFT, padx=5, pady=5)
 
         ### Frame 1
@@ -92,84 +106,108 @@ class QuestionMaker(Frame):
 
         # Save button -> save a new line in the file and continues the exec
         ok_button = Button(self, text="Salva", 
-                command=lambda: self.value_get(
-                    entry1.get(), entry2.get(), entry3.get(), entry4.get()
-                ))
+                        command=lambda: self.value_get(self, \
+                                Question(entry1.get(), entry2.get(), \
+                                entry3.get(), entry4.get())))
         ok_button.pack(side=RIGHT)
 
-    def value_get(self, domanda, r1, r2, rcorrect):
+    @classmethod
+    def value_get(cls, self, question):
+        """ Get the value from the frames """
         # check
-        if not domanda:
+        if not question.question:
             # not defined 
-            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della domanda! Reinserire grazie")
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
+                    "correttamente il testo della domanda! Reinserire grazie")
             return
-        if not r1:
+        if not question.ans_1:
           # not defined 
-          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 1! Reinserire grazie")
-          return
-        if not r2:
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
+                    "correttamente la risposta 1! Reinserire grazie")
+            return
+        if not question.ans_2:
           # not defined 
-          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta 2! Reinserire grazie")
-          return
-        if not rcorrect:
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserita " \
+                    "correttamente la risposta 2! Reinserire grazie")
+            return
+        if not question.ans_correct:
           # not defined 
-          tkMessageBox.showinfo("Attenzione!", "Non è stato inserito correttamente il testo della risposta corretta! Reinserire grazie")
-          return
+            tkMessageBox.showinfo("Attenzione!", "Non è stato inserito " \
+                    "correttamente la risposta corretta! Reinserire grazie")
+            return
         
-        # da_appendere = domanda + ";" + r1 + ";" + r2 + ";" + rcorrect
-
         # Mixing answers 
         # Extracting casual number between 1 and 3 
-        casual = randint(1,3)
+        casual = randint(1, 3)
         # Building the final string to be printed 
         if(casual == 1):
-          da_appendere = domanda + ";" + rcorrect + ";" + r1 + ";" + r2 + ";1;1;0\n"
+            da_appendere = question.question + ";" \
+                    + question.ans_correct + ";" \
+                    + question.ans_1 + ";" + question.ans_2 + ";1;1;0\n"
         elif(casual == 2):
-          da_appendere = domanda + ";" + r1 + ";" + rcorrect + ";" + r2 + ";2;1;0\n"
+            da_appendere = question.question + ";" \
+                    + question.ans_1 + ";" \
+                    + question.ans_correct + ";" \
+                    + question.ans_2 + ";2;1;0\n"
         else:
-          da_appendere = domanda + ";" + r2 + ";" + r1 + ";" + rcorrect + ";3;1;0\n"
+            da_appendere = question.question + ";" \
+                    + question.ans_2 + ";" \
+                    + question.ans_1 + ";" + question.ans_correct + ";3;1;0\n"
 
         # Name of output file
         filename = "data.jj"
-        
+       
+        self.open_file(filename, question, da_appendere)
+
+    @classmethod
+    def open_file(cls, filename, question, da_appendere):
+        """ Check, open file and write inside """
         # Try to open file 
         try:
-          myfile = open(filename, "r")
-          try:
-            # Check if line exists
-            for line in myfile:
-              if( (r1 in line) and (r2 in line) and (rcorrect in line)):
-                tkMessageBox.showinfo("Attenzione!", "La riga inserita esiste già nel database. Evita i duplicati!")
-                return
-          finally:
-            myfile.close()
-        except IOError as e:
-          print "Il file " + filename + " non esiste!"
-          # Create line 
-          try:
-            myfile = open(filename, "w")
+            myfile = open(filename, "r")
             try:
-              riga_iniziale = "Domanda;risposta 1;risposta 2;risposta 3;risposta esatta;punti risposta esatta;punti riposta sbagliata\n"
-              myfile.write(riga_iniziale)
-              print "Creato file: " + filename
-              print "Scritta riga iniziale"
+                # Check if line exists
+                for line in myfile:
+                    if( (question.ans_1 in line) 
+                        and (question.ans_2 in line) 
+                        and (question.ans_correct in line)):
+                        tkMessageBox.showinfo("Attenzione!", 
+                        "La riga inserita esiste già nel database." \
+                                "Evita i duplicati!")
+                        return
             finally:
-              myfile.close()
-          except IOError:
-            print "Errore in scrittura"
-            return
+                myfile.close()
+        except IOError :
+            print "Il file " + filename + " non esiste!"
+            # Create line 
+            try:
+                myfile = open(filename, "w")
+                try:
+                    riga_iniziale = "Domanda;risposta 1;risposta 2;risposta 3;"\
+                    "risposta esatta;punti risposta esatta;" \
+                    "punti riposta sbagliata\n"
+                    myfile.write(riga_iniziale)
+                    print "Creato file: " + filename
+                    print "Scritta riga iniziale"
+                finally:
+                    myfile.close()
+            except IOError:
+                print "Errore in scrittura"
+                return
 
         with open(filename, "a") as myfile:
-          myfile.write(da_appendere)
-          tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" + da_appendere + "\nnel file chiamato: " + filename)
+            myfile.write(da_appendere)
+            tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" \
+                    + da_appendere + "\nnel file chiamato: " + filename)
 
 
 # main function with main loop
 def main():
+    """ Main function """
   
     root = Tk()
     root.geometry("600x300+300+300")
-    app = QuestionMaker(root)
+    QuestionMaker(root)
     root.mainloop()  
 
 if __name__ == '__main__':
