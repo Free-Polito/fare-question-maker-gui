@@ -25,6 +25,7 @@ import tkMessageBox
 
 class Question(object):
     """ Class for storing the question/answers """
+    
     def __init__(self, question, ans_1, ans_2, ans_correct):        
         self.empty = False
          # Check values
@@ -44,7 +45,7 @@ class Question(object):
 # QuestionMaker main class
 class QuestionMaker(Frame):
     """ Main class for the GUI creation """
-  
+
     def __init__(self, parent):
         Frame.__init__(self, parent)   
         self.parent = parent
@@ -53,7 +54,7 @@ class QuestionMaker(Frame):
     @classmethod
     def init_ui(cls, self):
         """ Init the UI, creating all the frames """
-      
+
         self.parent.title("Review")
         self.pack(fill=BOTH, expand=True)
        
@@ -156,6 +157,7 @@ class QuestionMaker(Frame):
     @classmethod
     def open_file(cls, filename, question, da_appendere):
         """ Check, open file and write inside """
+        
         # Try to open file 
         try:
             myfile = open(filename, "r")
