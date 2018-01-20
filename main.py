@@ -134,17 +134,17 @@ class QuestionMaker(Frame):
         casual = randint(1, 3)
         # Building the final string to be printed 
         if(casual == 1):
-            da_appendere = question.question + ";" \
+            to_append = question.question + ";" \
                     + question.ans_correct + ";" \
                     + question.ans_1 + ";" \
                     + question.ans_2 + ";1;1;0\n"
         elif(casual == 2):
-            da_appendere = question.question + ";" \
+            to_append = question.question + ";" \
                     + question.ans_1 + ";" \
                     + question.ans_correct + ";" \
                     + question.ans_2 + ";2;1;0\n"
         else:
-            da_appendere = question.question + ";" \
+            to_append = question.question + ";" \
                     + question.ans_2 + ";" \
                     + question.ans_1 + ";" \
                     + question.ans_correct + ";3;1;0\n"
@@ -152,10 +152,10 @@ class QuestionMaker(Frame):
         # Name of output file
         filename = "data.jj"
        
-        self.open_file(filename, question, da_appendere)
+        self.open_file(filename, question, to_append)
 
     @classmethod
-    def open_file(cls, filename, question, da_appendere):
+    def open_file(cls, filename, question, to_append):
         """ Check, open file and write inside """
         
         # Try to open file 
@@ -193,9 +193,9 @@ class QuestionMaker(Frame):
                 return
 
         with open(filename, "a") as myfile:
-            myfile.write(da_appendere)
+            myfile.write(to_append)
             tkMessageBox.showinfo("Salvato!", "Ho salvato la riga:\n" \
-                    + da_appendere + "\nnel file chiamato: " + filename)
+                    + to_append + "\nnel file chiamato: " + filename)
 
 
 # main function with main loop
